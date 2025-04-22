@@ -1,5 +1,4 @@
 @startuml
-' Define Main class
 class Main {
     + List<Physiotherapist> physiotherapists
     + List<Patient> patients
@@ -7,7 +6,6 @@ class Main {
     + main(String[] args)
 }
 
-' Define Physiotherapist class
 class Physiotherapist {
     - String id
     - String name
@@ -17,7 +15,6 @@ class Physiotherapist {
     + addTreatment(Treatment)
 }
 
-' Define Treatment class
 class Treatment {
     - String name
     - String dateTime
@@ -26,7 +23,6 @@ class Treatment {
     + getPatient()
 }
 
-' Define Patient class
 class Patient {
     - String id
     - String name
@@ -34,19 +30,25 @@ class Patient {
     + getName()
 }
 
-' Define Booking class
 class Booking {
     - List<Treatment> treatments
     + bookTreatment(String, Patient)
     + cancelTreatment(String, Patient)
 }
 
+class ClinicReport {
+    - List<Physiotherapist> physiotherapists
+    + generateReport()
+}
+
 ' UML Relationships
 Main --> Physiotherapist : "Manages"
 Main --> Patient : "Registers"
 Main --> Booking : "Handles"
+Main --> ClinicReport : "Generates Reports"
 
-Physiotherapist "1" *-- "many" Treatment : provides
-Treatment "1" *-- "1" Patient : booked by
-Patient --> Treatment : receives
+ClinicReport --> Physiotherapist : "Accesses"
+Physiotherapist "1" *-- "many" Treatment : Provides
+Treatment "1" *-- "1" Patient : Booked by
+Patient --> Treatment : Receives
 @enduml
