@@ -1,10 +1,52 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Booking {
     private List<Treatment> treatments;
+    private List<Patient> patients;
 
     public Booking(List<Treatment> treatments) {
         this.treatments = treatments;
+        this.patients = new ArrayList<>();
+    }
+
+
+    public void addPatient(String id, String name, String address, String phone) {
+        Patient newPatient = new Patient(id, name, address, phone);
+        patients.add(newPatient);
+        System.out.println("Patient added: " + newPatient.getName() + " (Address: " + newPatient.getAddress() + ")");
+    }
+
+
+    public void removePatient(String id) {
+        boolean removed = patients.removeIf(patient -> patient.getId().equals(id));
+        if (removed) {
+            System.out.println("Patient with ID " + id + " has been removed.");
+        } else {
+            System.out.println("No patient found with ID " + id);
+        }
+    }
+
+
+    public void listPatients() {
+        if (patients.isEmpty()) {
+            System.out.println("No patients registered.");
+            return;
+        }
+        for (Patient p : patients) {
+            System.out.println(p.getId() + ": " + p.getName() + " (" + p.getPhone() + ", Address: " + p.getAddress() + ")");
+        }
+    }
+
+
+    public Patient getPatientById(String id) {
+        for (Patient p : patients) {
+            if (p.getId().equals(id)) {
+                return p;
+            }
+        }
+        System.out.println("Patient with ID " + id + " not found.");
+        return null;
     }
 
     public boolean bookTreatment(String treatmentName, Patient patient) {

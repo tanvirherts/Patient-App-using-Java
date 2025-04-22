@@ -14,7 +14,6 @@ public class Main {
                 List.of("Pain Management", "Post-Surgery Recovery"));
 
 
-
         Treatment treatment1 = new Treatment("Back Pain Therapy", "2025-04-22 10:00 AM", physio1);
         Treatment treatment2 = new Treatment("Sports Injury Rehab", "2025-04-22 02:00 PM", physio1);
         Treatment treatment3 = new Treatment("Post-Surgery Recovery", "2025-04-22 11:00 AM", physio2);
@@ -26,10 +25,6 @@ public class Main {
         physio2.addTreatment(treatment4);
 
 
-        Patient patient1 = new Patient("PA001", "John Doe", "Birmingham", "555123456");
-        Patient patient2 = new Patient("PA002", "Jane Smith", "Liverpool", "555654321");
-
-
         List<Treatment> allTreatments = new ArrayList<>(List.of(treatment1, treatment2, treatment3, treatment4));
         Booking bookingSystem = new Booking(allTreatments);
 
@@ -38,25 +33,26 @@ public class Main {
             System.out.println("\nWelcome to Boost Physio Clinic");
             System.out.println("1. Book Treatment");
             System.out.println("2. Cancel Treatment");
-            System.out.println("3. Generate Report");
-            System.out.println("4. Exit");
+            System.out.println("3. Add Patient");
+            System.out.println("4. Remove Patient");
+            System.out.println("5. List Patients");
+            System.out.println("6. Generate Report");
+            System.out.println("7. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
                     System.out.print("Enter Treatment Name: ");
                     String treatmentName = scanner.nextLine();
-                    System.out.print("Enter Patient Name: ");
-                    String patientName = scanner.nextLine();
+                    System.out.print("Enter Patient ID: ");
+                    String patientID = scanner.nextLine();
+                    Patient bookingPatient = bookingSystem.getPatientById(patientID);
 
-                    Patient patient = patientName.equalsIgnoreCase(patient1.getName()) ? patient1 :
-                            patientName.equalsIgnoreCase(patient2.getName()) ? patient2 : null;
-
-                    if (patient != null) {
-                        boolean booked = bookingSystem.bookTreatment(treatmentName, patient);
+                    if (bookingPatient != null) {
+                        boolean booked = bookingSystem.bookTreatment(treatmentName, bookingPatient);
                         System.out.println(booked ? "Booking successful!" : "Booking failed.");
                     } else {
                         System.out.println("Error: Patient not found.");
@@ -66,11 +62,9 @@ public class Main {
                 case 2:
                     System.out.print("Enter Treatment Name: ");
                     String cancelName = scanner.nextLine();
-                    System.out.print("Enter Patient Name: ");
-                    String cancelPatientName = scanner.nextLine();
-
-                    Patient cancelPatient = cancelPatientName.equalsIgnoreCase(patient1.getName()) ? patient1 :
-                            cancelPatientName.equalsIgnoreCase(patient2.getName()) ? patient2 : null;
+                    System.out.print("Enter Patient ID: ");
+                    String cancelPatientID = scanner.nextLine();
+                    Patient cancelPatient = bookingSystem.getPatientById(cancelPatientID);
 
                     if (cancelPatient != null) {
                         boolean cancelled = bookingSystem.cancelTreatment(cancelName, cancelPatient);
@@ -81,12 +75,34 @@ public class Main {
                     break;
 
                 case 3:
+                    System.out.print("Enter Patient ID: ");
+                    String newPatientID = scanner.nextLine();
+                    System.out.print("Enter Patient Name: ");
+                    String newPatientName = scanner.nextLine();
+                    System.out.print("Enter Patient Address: ");
+                    String newPatientAddress = scanner.nextLine();
+                    System.out.print("Enter Patient Phone: ");
+                    String newPatientPhone = scanner.nextLine();
+                    bookingSystem.addPatient(newPatientID, newPatientName, newPatientAddress, newPatientPhone);
+                    break;
+
+                case 4:
+                    System.out.print("Enter Patient ID to remove: ");
+                    String removeID = scanner.nextLine();
+                    bookingSystem.removePatient(removeID);
+                    break;
+
+                case 5:
+                    bookingSystem.listPatients();
+                    break;
+
+                case 6:
                     List<Physiotherapist> physiotherapists = new ArrayList<>(List.of(physio1, physio2));
                     ClinicReport report = new ClinicReport(physiotherapists);
                     report.generateReport();
                     break;
 
-                case 4:
+                case 7:
                     System.out.println("Exiting system...");
                     scanner.close();
                     return;
