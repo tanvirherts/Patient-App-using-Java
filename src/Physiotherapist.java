@@ -16,14 +16,14 @@ public class Physiotherapist {
         this.address = address;
         this.phone = phone;
         this.expertise = expertise;
-        this.timetable = new ArrayList<>(); // ✅ Fix: Prevent null errors
+        this.timetable = new ArrayList<>();
     }
 
     public void setTimetable(List<Treatment> timetable) {
         this.timetable = timetable;
     }
 
-    public void addTreatment(Treatment treatment) { // ✅ Fix: Allow adding treatments individually
+    public void addTreatment(Treatment treatment) {
         this.timetable.add(treatment);
     }
 

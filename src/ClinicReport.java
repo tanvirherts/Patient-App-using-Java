@@ -20,7 +20,7 @@ public class ClinicReport {
 
 
         for (Physiotherapist physiotherapist : physiotherapists) {
-            Physiotherapist p; // ✅ Fix: Explicit Casting
+            Physiotherapist p;
             p = (Physiotherapist) physiotherapist;
 
             System.out.println("\nPhysiotherapist: " + p.getName());
@@ -44,8 +44,8 @@ public class ClinicReport {
 
         System.out.println("\nPhysiotherapists sorted by attended appointments:");
         physiotherapists.stream()
-                .filter(p -> p.getTimetable() != null) // ✅ Fix: Prevent NullPointerException
-                .sorted(Comparator.comparingInt(ClinicReport::applyAsInt).reversed()) // ✅ Handle empty timetables properly
+                .filter(p -> p.getTimetable() != null)
+                .sorted(Comparator.comparingInt(ClinicReport::applyAsInt).reversed())
                 .forEach(p -> System.out.println(p.getName()));
     }
 }
