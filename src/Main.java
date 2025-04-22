@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // ✅ Creating Physiotherapists
+
         Physiotherapist physio1 = new Physiotherapist("P001", "Dr. James Smith", "London", "123456789",
                 List.of("Sports Therapy", "Rehabilitation"));
 
@@ -14,7 +14,7 @@ public class Main {
                 List.of("Pain Management", "Post-Surgery Recovery"));
 
 
-        // ✅ Creating Treatments and Assigning to Physiotherapists
+
         Treatment treatment1 = new Treatment("Back Pain Therapy", "2025-04-22 10:00 AM", physio1);
         Treatment treatment2 = new Treatment("Sports Injury Rehab", "2025-04-22 02:00 PM", physio1);
         Treatment treatment3 = new Treatment("Post-Surgery Recovery", "2025-04-22 11:00 AM", physio2);
@@ -25,15 +25,15 @@ public class Main {
         physio2.addTreatment(treatment3);
         physio2.addTreatment(treatment4);
 
-        // ✅ Creating Patients
+
         Patient patient1 = new Patient("PA001", "John Doe", "Birmingham", "555123456");
         Patient patient2 = new Patient("PA002", "Jane Smith", "Liverpool", "555654321");
 
-        // ✅ Creating Booking System
+
         List<Treatment> allTreatments = new ArrayList<>(List.of(treatment1, treatment2, treatment3, treatment4));
         Booking bookingSystem = new Booking(allTreatments);
 
-        // ✅ Menu to Handle Bookings
+
         while (true) {
             System.out.println("\nWelcome to Boost Physio Clinic");
             System.out.println("1. Book Treatment");
