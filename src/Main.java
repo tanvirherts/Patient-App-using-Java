@@ -37,7 +37,9 @@ public class Main {
             System.out.println("4. Remove Patient");
             System.out.println("5. List Patients");
             System.out.println("6. Generate Report");
-            System.out.println("7. Exit");
+            System.out.println("7. Mark Attendance");
+            System.out.println("8. Check Attendance");
+            System.out.println("9. Exit");
             System.out.print("Choose an option: ");
 
             int choice = scanner.nextInt();
@@ -103,6 +105,27 @@ public class Main {
                     break;
 
                 case 7:
+                    System.out.print("Enter Treatment Name: ");
+                    String attendanceTreatmentName = scanner.nextLine();
+                    System.out.print("Enter Patient ID: ");
+                    String attendancePatientID = scanner.nextLine();
+                    Patient attendancePatient = bookingSystem.getPatientById(attendancePatientID);
+
+                    if (attendancePatient != null) {
+                        boolean marked = bookingSystem.markAttendance(attendanceTreatmentName, attendancePatient);
+                        System.out.println(marked ? "Attendance marked successfully!" : "Failed to mark attendance.");
+                    } else {
+                        System.out.println("Error: Patient not found.");
+                    }
+                    break;
+
+                case 8:
+                    System.out.print("Enter Treatment Name to check attendance: ");
+                    String checkTreatmentName = scanner.nextLine();
+                    bookingSystem.checkAttendance(checkTreatmentName);
+                    break;
+
+                case 9:
                     System.out.println("Exiting system...");
                     scanner.close();
                     return;

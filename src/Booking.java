@@ -49,6 +49,7 @@ public class Booking {
         return null;
     }
 
+
     public boolean bookTreatment(String treatmentName, Patient patient) {
         for (Treatment t : treatments) {
             if (t.getName().equalsIgnoreCase(treatmentName) && t.getPatient() == null) {
@@ -61,6 +62,7 @@ public class Booking {
         return false;
     }
 
+
     public boolean cancelTreatment(String treatmentName, Patient patient) {
         for (Treatment t : treatments) {
             if (t.getName().equalsIgnoreCase(treatmentName) && t.getPatient() == patient) {
@@ -71,5 +73,30 @@ public class Booking {
         }
         System.out.println("Error: No booking found for " + treatmentName);
         return false;
+    }
+
+
+    public boolean markAttendance(String treatmentName, Patient patient) {
+        for (Treatment t : treatments) {
+            if (t.getName().equalsIgnoreCase(treatmentName) && t.getPatient() == patient) {
+                t.markAttendance(true); // Set attendance status to true
+                System.out.println("Attendance marked for " + treatmentName);
+                return true;
+            }
+        }
+        System.out.println("Error: No booking found for " + treatmentName);
+        return false;
+    }
+
+
+    public void checkAttendance(String treatmentName) {
+        for (Treatment t : treatments) {
+            if (t.getName().equalsIgnoreCase(treatmentName)) {
+                String status = t.isAttended() ? "Attended" : "Not Attended";
+                System.out.println("Treatment: " + treatmentName + " | Status: " + status);
+                return;
+            }
+        }
+        System.out.println("Error: Treatment not found.");
     }
 }
