@@ -12,6 +12,9 @@ public class Treatment {
         this.attended = false;
     }
 
+    public Treatment(String massageTherapy, Object dateTime) {
+    }
+
     public String getName() {
         return name;
     }
@@ -41,6 +44,6 @@ public class Treatment {
     }
 
     public void markAttendance(boolean attended) {
-        this.attended = attended; 
+        this.attended = attended;
     }
 }

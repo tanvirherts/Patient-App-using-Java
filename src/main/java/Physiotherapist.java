@@ -6,9 +6,8 @@ public class Physiotherapist {
     private String name;
     private String address;
     private String phone;
-    private List<String> expertise;
-    private List<Treatment> timetable;
-    private List<Physiotherapist> physiotherapists;
+    public List<String> expertise;
+    private List<Treatment> treatments;
 
     public Physiotherapist(String id, String name, String address, String phone, List<String> expertise) {
         this.id = id;
@@ -16,26 +15,22 @@ public class Physiotherapist {
         this.address = address;
         this.phone = phone;
         this.expertise = expertise;
-        this.timetable = new ArrayList<>();
-    }
-
-    public void setTimetable(List<Treatment> timetable) {
-        this.timetable = timetable;
+        this.treatments = new ArrayList<>();
     }
 
     public void addTreatment(Treatment treatment) {
-        this.timetable.add(treatment);
+        treatments.add(treatment);
     }
 
-    public List<Treatment> getTimetable() {
-        return timetable;
-    }
-
-    public List<String> getExpertise() {
-        return expertise;
+    public String getId() {
+        return id;
     }
 
     public String getName() {
         return name;
+    }
+
+    public List<Treatment> getTreatments() {
+        return treatments;
     }
 }

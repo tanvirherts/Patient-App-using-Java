@@ -10,13 +10,14 @@ public class Booking {
         this.patients = new ArrayList<>();
     }
 
+    public Booking() {
+    }
 
     public void addPatient(String id, String name, String address, String phone) {
         Patient newPatient = new Patient(id, name, address, phone);
         patients.add(newPatient);
         System.out.println("Patient added: " + newPatient.getName() + " (Address: " + newPatient.getAddress() + ")");
     }
-
 
     public void removePatient(String id) {
         boolean removed = patients.removeIf(patient -> patient.getId().equals(id));
@@ -26,7 +27,6 @@ public class Booking {
             System.out.println("No patient found with ID " + id);
         }
     }
-
 
     public void listPatients() {
         if (patients.isEmpty()) {
@@ -38,7 +38,6 @@ public class Booking {
         }
     }
 
-
     public Patient getPatientById(String id) {
         for (Patient p : patients) {
             if (p.getId().equals(id)) {
@@ -48,7 +47,6 @@ public class Booking {
         System.out.println("Patient with ID " + id + " not found.");
         return null;
     }
-
 
     public boolean bookTreatment(String treatmentName, Patient patient) {
         for (Treatment t : treatments) {
@@ -62,7 +60,6 @@ public class Booking {
         return false;
     }
 
-
     public boolean cancelTreatment(String treatmentName, Patient patient) {
         for (Treatment t : treatments) {
             if (t.getName().equalsIgnoreCase(treatmentName) && t.getPatient() == patient) {
@@ -75,7 +72,6 @@ public class Booking {
         return false;
     }
 
-
     public boolean markAttendance(String treatmentName, Patient patient) {
         for (Treatment t : treatments) {
             if (t.getName().equalsIgnoreCase(treatmentName) && t.getPatient() == patient) {
@@ -87,7 +83,6 @@ public class Booking {
         System.out.println("Error: No booking found for " + treatmentName);
         return false;
     }
-
 
     public void checkAttendance(String treatmentName) {
         for (Treatment t : treatments) {

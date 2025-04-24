@@ -4,14 +4,12 @@ public class Patient {
     private String address;
     private String phone;
 
-
     public Patient(String id, String name, String address, String phone) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phone = phone;
     }
-
 
     public String getId() {
         return id;
@@ -40,7 +38,6 @@ public class Patient {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
 
     @Override
     public String toString() {
