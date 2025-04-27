@@ -1,54 +1,82 @@
 @startuml
-class Main {
-    + List<Physiotherapist> physiotherapists
-    + List<Patient> patients
-    + Booking bookingSystem
-    + main(String[] args)
-}
-
-class Physiotherapist {
-    - String id
-    - String name
-    - String phone
-    - List<Treatment> timetable
-    + getTimetable()
-    + addTreatment(Treatment)
-}
-
 class Treatment {
     - String name
     - String dateTime
     - Physiotherapist physiotherapist
     - Patient patient
-    + getPatient()
+    - boolean attended
+    + Treatment(String name, String dateTime, Physiotherapist physiotherapist)
+    + Treatment(String massageTherapy, Object dateTime)
+    + String getName()
+    + String getDateTime()
+    + Physiotherapist getPhysiotherapist()
+    + Patient getPatient()
+    + boolean isAttended()
+    + void bookAppointment(Patient patient)
+    + void cancelAppointment()
+    + void markAttendance(boolean attended)
+}
+
+class Booking {
+    - List<Treatment> treatments
+    - List<Patient> patients
+    + Booking(List<Treatment> treatments)
+    + Booking()
+    + void addPatient(String id, String name, String address, String phone)
+    + void removePatient(String id)
+    + void listPatients()
+    + Patient getPatientById(String id)
+    + boolean bookTreatment(String treatmentName, Patient patient)
+    + boolean cancelTreatment(String treatmentName, Patient patient)
+    + boolean markAttendance(String treatmentName, Patient patient)
+    + void checkAttendance(String treatmentName)
 }
 
 class Patient {
     - String id
     - String name
+    - String address
     - String phone
-    + getName()
+    + Patient(String id, String name, String address, String phone)
+    + String getId()
+    + String getName()
+    + String getAddress()
+    + String getPhone()
+    + void setName(String name)
+    + void setAddress(String address)
+    + void setPhone(String phone)
 }
 
-class Booking {
+class Physiotherapist {
+    - String id
+    - String name
+    - String address
+    - String phone
+    + List<String> expertise
     - List<Treatment> treatments
-    + bookTreatment(String, Patient)
-    + cancelTreatment(String, Patient)
+    + Physiotherapist(String id, String name, String address, String phone, List<String> expertise)
+    + void addTreatment(Treatment treatment)
+    + String getId()
+    + String getName()
+    + List<Treatment> getTreatments()
 }
 
 class ClinicReport {
     - List<Physiotherapist> physiotherapists
-    + generateReport()
+    + ClinicReport(List<Physiotherapist> physiotherapists)
+    + void generateReport()
 }
 
-' UML Relationships
-Main --> Physiotherapist : "Manages"
-Main --> Patient : "Registers"
-Main --> Booking : "Handles"
-Main --> ClinicReport : "Generates Reports"
+class Main {
+    + static void main(String[] args)
+}
 
-ClinicReport --> Physiotherapist : "Accesses"
-Physiotherapist "1" *-- "many" Treatment : Provides
-Treatment "1" *-- "1" Patient : Booked by
-Patient --> Treatment : Receives
+' Relationships
+Treatment --> Physiotherapist
+Treatment --> Patient
+Booking --> Treatment
+Booking --> Patient
+Physiotherapist --> Treatment
+ClinicReport --> Physiotherapist
+
 @enduml
